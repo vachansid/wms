@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide|Sofia|Trirong">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>Worker</title>
+    <style>
+        .center_fixed {
+       margin: 0px 10px 5px 500px;
+       width: 40%;
+      }
+      .center_fixed1 {
+       margin: 0px 10px 5px 500px;
+       width: 50%;
+      }
+       body {
+  background-color: rgb(247,247,247);
+  background-image: url("static/images/worker.png");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-attachment: fixed;
+
+}
+.btn {
+          border-style: solid;
+          border-color: black;
+          border-width: 3px;
+          border-radius: 20px;
+          background-color: rgb(247,247,247);
+          color: black
+      }
+      .btn:hover{
+          background-color: black;
+          border-style: solid;
+          border-width: 3px;
+          border-color: rgb(255,153,52);
+          color: rgb(255,153,52);
+
+      }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid" style="background-color: rgb(255,153,52);">
+    <a class="navbar-brand" href="/" style="font-size: 40px;">
+      <img src="./static/images/logo.svg" alt="" width="50" height="50" class="d-inline-block align-text-top">
+      WMS
+    </a>
+    <div class="collapse navbar-collapse" id="navbarSupportedConten">
+         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+        </li>
+        <li class="nav-item">
+        </li>
+              <form action = "/displayworkers" method="POST">
+                        <button type="submit" class="btn btn-secondary" style="margin-left: 10px">Display all workers</button>
+                        <input type="hidden" class="form-control" id="id" aria-describedby="emailHelp" placeholder="UID" name="uid" value = {{ uid }} />
+                   </form>
+              <form action = "/displayworks" method="POST">
+                        <button type="submit" class="btn btn-secondary" style="margin-left: 10px">Display all works</button>
+                        <input type="hidden" class="form-control" id="id1" aria-describedby="emailHelp" placeholder="UID" name="uid" value = {{ uid }} />
+                   </form>
+      </ul>
+         <span class="navbar-text">
+             <img src="./static/images/user.svg" alt="" width="25" height="25" class="d-inline-block align-text-top">
+           <h style="font-size: 20px;color: black">{{ user }} </h>
+
+       </a>
+    </span>
+        <span class="navbar-text">
+        <form action="/account" method="GET">
+     <input type="hidden" name = "uid" value = {{ uid }}>
+    <button type="submit" class="btn" style="margin-left: 10px">Home</button>
+
+</form>
+            </span>
+     <span class="navbar-text">
+       <a class="nav-link active" aria-current="page" href="/">
+           <h class="btn">Log Out</h>
+       </a>
+    </span>
+
+      </div>
+  </div>
+</nav>
+<br/><br/>
+
+<div class="container">
+    <br/>
+  <div class="center_fixed1"> <p style="font-size: 40px;font-family: 'Audiowide', sans-serif;">Tell us about the worker</p></div>
+    {% if statment %}
+    {% if k==1 %}
+   <div class="alert alert-warning alert-dismissible fade show" role="alert" style="width: 45%;margin: 30px 0px 10px 500px;">
+  <strong>
+        <img src="./static/images/warning.png" alt="" width="18" height="18" class="d-inline-block align-text-top">
+      {{ statment }}</strong>
+</div>
+    {% endif %}
+    {% if k==0 %}
+    <div class="alert alert-success" role="alert" style="width: 45%;margin: 30px 0px 10px 500px;">
+  <strong>
+     <img src="./static/images/tick1.png" alt="" width="18" height="18" class="d-inline-block align-text-top">
+      {{ statment }}
+  </strong>
+</div>
+     {% endif %}
+    {% endif %}
+<form action = "/worker" method="POST">
+  <div class="center_fixed">
+    <label for="workername" class="form-label">Worker's Name</label>
+    <input type="text" class="form-control" id="workername" aria-describedby="emailHelp" placeholder="eg. Chandu" name = 'worker_name' value ="{{ wn }}">
+  </div>
+  <div class="center_fixed">
+    <label for="role" class="form-label">Role</label>
+    <input type="text" class="form-control" id="role" aria-describedby="emailHelp" placeholder="eg. Electrician" name = 'role' value ="{{ r }}">
+  </div>
+  <div class="center_fixed">
+
+      <label for="skill" class="form-label">Skill Level</label>
+    <input type="number" class="form-control" id="skill" aria-describedby="emailHelp" placeholder="eg. 5" name = 'skill_level' value="{{ sl }}">
+
+       <button type="submit" class="btn btn-secondary" style="margin-top: 10px">Submit</button>
+
+  </div>
+    <input type="hidden" name='usrname' value="{{ username }}" />
+    <input type="hidden" class="form-control" id="id2" aria-describedby="emailHelp" placeholder="UID" name="uid" value = {{ uid }} />
+</form>
+
+</div>
+</body>
+</html>
